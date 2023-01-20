@@ -42,7 +42,36 @@ let words = [
   "Slate"
 ];
 
-let timeLeft = document.getElementById("timerLeft");
+let alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
+];
+
+let countdown = document.getElementById("timeLeft");
 let letter1 = document.getElementById("letter1");
 let letter2 = document.getElementById("letter2");
 let letter3 = document.getElementById("letter3");
@@ -52,7 +81,9 @@ let startButton = document.getElementById("start");
 let resetButton = document.getElementById("reset");
 let winsSpan = document.getElementById("winsNo");
 let losesSpan = document.getElementById("losesNo");
-let playArea = document.getElementById("playArea")
+let playArea = document.getElementById("playArea");
+let wrongLetterList = document.getElementById("wrongLetters");
+let newGame = document.getElementById("newGame");
 
 let wins = 0;
 let loses = 0;
@@ -62,15 +93,13 @@ function init() {
   if (storedWins !== null) {
     wins = storedWins;
     winsSpan.textContent = wins;
-  
+  };
     const storedLoses = localStorage.getItem("loses");
   if (storedLoses !== null) {
     loses = storedLoses
     losesSpan.textContent = loses;
+  };
 };
-};
-};
-
 init();
 
 function updateWins() {
@@ -85,9 +114,23 @@ function updateLoses() {
   localStorage.setItem("loses", loses);
 };
 
+newGame.addEventListener("click", function(arr) {
+  arr = [letter1, letter2, letter3, letter4, letter5]
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].className = "lettersQ";
+    arr[i].textContent = "_";
+  }
+  randomWord();
+  checkLetters();
+  countdownTimer();
+  wrongLetterList.textContent = "";
+})
+
 startButton.addEventListener("click", function() {
   randomWord();
   checkLetters();
+  countdownTimer();
+  wrongLetterList.textContent = "";
 });
 
 function getRandom(value) {
@@ -114,101 +157,130 @@ function checkLetters(chosenWord,l1, l2, l3, l4, l5) {
     typed = event.key;
     check = typed.toUpperCase();
     switch(check) {
-      case l1 && l2:
-        letter1.textContent = l1;
-        letter1.className = "letters"
-        letter2.textContent = l2;
-        letter2.className = "letters"
-      break;
-      case l1 && l3:
-        letter1.textContent = l1;
-        letter1.className = "letters"
-        letter3.textContent = l3;
-        letter3.className = "letters"
-      break;
-      case l1 && l4:
-        letter1.textContent = l1;
-        letter1.className = "letters"
-        letter4.textContent = l4;
-        letter4.className = "letters"
-      break;
-      case l1 && l5:
-      letter1.textContent = l1;
-      letter1.className = "letters"
-      letter5.textContent = l5;
-      letter5.className = "letters"
-      break;
-      case l2 && l3:
-        letter2.textContent = l2;
-        letter2.className = "letters"
-        letter3.textContent = l3;
-        letter3.className = "letters"
-      break;
-      case l2 && l4:
-      letter2.textContent = l2;
-      letter2.className = "letters"
-      letter4.textContent = l4;
-      letter4.className = "letters"
-      break;
-      case l2 && l5:
-        letter2.textContent = l2;
-        letter2.className = "letters"
-        letter5.textContent = l5;
-        letter5.className = "letters"
-      break;
-      case l3 && l4:
-        letter3.textContent = l3;
-        letter3.className = "letters"
-        letter4.textContent = l4;
-        letter4.className = "letters"
-      break;
-      case l3 && l5:
-        letter3.textContent = l3;
-        letter3.className = "letters"
-        letter5.textContent = l5;
-        letter5.className = "letters"
-      break;
-      case l4 && l5:
-        letter4.textContent = l4;
-        letter4.className = "letters"
-        letter5.textContent = l5;
-        letter5.className = "letters"
-      break;
       case l1:
         letter1.textContent = l1;
-        letter1.className = "letters"
+        letter1.className = "letters";
       break;
       case l2:
         letter2.textContent = l2;
-        letter2.className = "letters"
+        letter2.className = "letters";
       break;
       case l3:
         letter3.textContent = l3;
-        letter3.className = "letters"
+        letter3.className = "letters";
       break;
       case l4:
         letter4.textContent = l4;
-        letter4.className = "letters"
+        letter4.className = "letters";
       break;
       case l5:
         letter5.textContent = l5;
-        letter5.className = "letters"
+        letter5.className = "letters";
+      break;
+      case l1 && l2:
+        letter1.textContent = l1;
+        letter1.className = "letters";
+        letter2.textContent = l2;
+        letter2.className = "letters";
+      break;
+      case l1 && l3:
+        letter1.textContent = l1;
+        letter1.className = "letters";
+        letter3.textContent = l3;
+        letter3.className = "letters";
+      break;
+      case l1 && l4:
+        letter1.textContent = l1;
+        letter1.className = "letters";
+        letter4.textContent = l4;
+        letter4.className = "letters";
+      break;
+      case l1 && l5:
+      letter1.textContent = l1;
+      letter1.className = "letters";
+      letter5.textContent = l5;
+      letter5.className = "letters";
+      break;
+      case l2 && l3:
+        letter2.textContent = l2;
+        letter2.className = "letters";
+        letter3.textContent = l3;
+        letter3.className = "letters";
+      break;
+      case l2 && l4:
+      letter2.textContent = l2;
+      letter2.className = "letters";
+      letter4.textContent = l4;
+      letter4.className = "letters";
+      break;
+      case l2 && l5:
+        letter2.textContent = l2;
+        letter2.className = "letters";
+        letter5.textContent = l5;
+        letter5.className = "letters";
+      break;
+      case l3 && l4:
+        letter3.textContent = l3;
+        letter3.className = "letters";
+        letter4.textContent = l4;
+        letter4.className = "letters";
+      break;
+      case l3 && l5:
+        letter3.textContent = l3;
+        letter3.className = "letters";
+        letter5.textContent = l5;
+        letter5.className = "letters";
+      break;
+      case l4 && l5:
+        letter4.textContent = l4;
+        letter4.className = "letters";
+        letter5.textContent = l5;
+        letter5.className = "letters";
     };
-    if (check !== l1 && check !== l2 && check !== l3 && check !== l4 && check !== l5) {
+
+    if (check !== l1 && check !== l2 && check !== l3 && check !== l4 && check !== l5 && alphabet.includes(check)) {
       playArea.className = "X";
       setTimeout(function() {
         playArea.className = "noX"
       }, 500);
-    };
-    if(letter1.className === "letters" && letter2.className === "letters" && letter3.className === "letters" && letter4.className === "letters" && letter5.className === "letters") {
-      setTimeout(function() {
-        alert("You guessed the word!\nWell done!")
-      }, 500);
-      updateWins();
+      key = event.key
+      wrongLetterList.textContent += (" " + key.toUpperCase())
     };
   });
 };
 
+function countdownTimer(timeLeft, timeInterval) {
+  timeLeft = 30;
+
+  timeInterval = setInterval(function () {
+    if(letter1.className === "letters" && letter2.className === "letters" && letter3.className === "letters" && letter4.className === "letters" && letter5.className === "letters") {
+      updateWins();
+      startButton.setAttribute("style", "display: none;")
+      wrongLetterList.textContent = "Congratulations, you won!";
+      newGame.setAttribute("style", "display: inline;");
+      clearInterval(timeInterval);
+      return;
+    } else if(timeLeft > 0){
+      countdown.textContent = timeLeft + " seconds remaining";
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      countdown.textContent = timeLeft + " second remaining";
+    timeLeft--;
+    } else {
+      countdown.textContent = "";
+      wrongLetterList.textContent = "Sorry, you ran out of time!"
+      playArea.className = "X"
+      updateLoses();
+      clearInterval(timeInterval);
+    };
+  }, 1000);
+  return;
+};
+
 resetButton.addEventListener("click", function() {
+  wins = -1;
+  loses = -1;
+  updateWins();
+  updateLoses();
   location.reload();
 });

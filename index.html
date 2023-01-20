@@ -11,7 +11,7 @@
     <header class="header">
       <h1>Guess the word!</h1>
       <div id="timerArea">
-        <timer><span id="timeLeft"></span></timer>
+        <timer id="timeLeft"></timer>
       </div>
     </header>
     <div id="playArea" class="noX">
@@ -22,13 +22,15 @@
         <p class="lettersQ" id="letter4">_</p>
         <p class="lettersQ" id="letter5">_</p>
       </div>
+      <div id="wrongLetters"></div>
       <div class="buttonArea">
+        <button id="newGame" class="customButton">New Game</button>
         <button id="start" class="customButton">Start Game</button>
         <div id="tally">
           <p id="tallyEl">Wins: <span id="winsNo">0</span></p>
           <p id="tallyEl">Loses: <span id="losesNo">0</span></p>
         </div>
-        <button id="reset" class="customButton">Play Again</button>
+        <button id="reset" class="customButton">Reset</button>
       </div>
     </div>
     <div id="howToPlay">
