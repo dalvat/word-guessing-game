@@ -37,6 +37,12 @@ h1 {
   margin-right: 20px;
 }
 
+#wrongLetters {
+  min-height: 3em;
+  font-size: 20px;
+  text-align: center;
+}
+
 #playArea {
   display: flex;
   flex-direction: column;
@@ -88,6 +94,11 @@ h1 {
 
 #start {
   background-color: #34c218;
+}
+
+#newGame {
+  background-color: #34c218;
+  display: none;
 }
 
 #tally {
